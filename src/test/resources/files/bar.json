@@ -1,0 +1,9 @@
+{
+  "input": {
+    "foo": 1
+  },
+  "context": "myContext",
+  "output": {
+    "success": true
+  }
+}

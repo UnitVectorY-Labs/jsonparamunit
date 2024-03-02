@@ -1,0 +1,4 @@
+{
+  "input": { "foo": "bar", "value": "a" },
+  "output": { "value": "a" }
+}

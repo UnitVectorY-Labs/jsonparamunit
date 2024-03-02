@@ -1,0 +1,8 @@
+{
+  "input": {
+    "foo": 0
+  },
+  "output": {
+    "success": false
+  }
+}

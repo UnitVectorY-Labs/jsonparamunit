@@ -1,0 +1,9 @@
+{
+  "input": {
+    "value": "1234567890"
+  },
+  "context": "optionalContext",
+  "output": {
+    "value": "0987654321"
+  }
+}
