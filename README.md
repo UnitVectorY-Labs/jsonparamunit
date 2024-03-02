@@ -83,6 +83,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.unitvectory.fileparamunit.ListFileSource;
+import com.unitvectory.jsonparamunit.JsonClassParamTest;
 
 public class ReverseStringTest extends JsonClassParamTest<TestObject, TestObject> {
 
