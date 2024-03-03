@@ -95,10 +95,7 @@ public class ReverseStringTest extends JsonClassParamUnit<TestObject, TestObject
     }
 
     protected ReverseStringTest() {
-        super(InputString.class,
-                JsonParamUnitConfig.builder().mapper(new ObjectMapper()
-                        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false))
-                        .build());
+        super(InputString.class, JsonParamUnitConfig.builder().build());
     }
 
     @Override
