@@ -14,11 +14,11 @@ import com.unitvectory.jsonparamunit.example.InClass;
 import com.unitvectory.jsonparamunit.example.OutClass;
 
 /**
- * Test implementation of the JsonClassParamTest class.
+ * Test implementation of the JsonClassParamUnit class.
  * 
  * @author Jared Hatfield (UnitVectorY Labs)
  */
-public class JsonClassTest extends JsonClassParamTest<InClass, OutClass> {
+public class JsonClassTest extends JsonClassParamUnit<InClass, OutClass> {
 
     /**
      * Creates a new instance of the JsonClassTest.

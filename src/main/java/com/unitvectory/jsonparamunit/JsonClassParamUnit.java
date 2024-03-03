@@ -9,7 +9,6 @@
 package com.unitvectory.jsonparamunit;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * JSON based parameterized test case that provides the input and output as Java Classes parsed
@@ -17,44 +16,44 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * 
  * @author Jared Hatfield (UnitVectorY Labs)
  */
-public abstract class JsonClassParamTest<I, O> extends JsonNodeParamTest {
+public abstract class JsonClassParamUnit<I, O> extends JsonNodeParamUnit {
 
     private final Class<I> inputClass;
 
     /**
-     * Creates a new instance of the JsonClassParamTest.
+     * Creates a new instance of the JsonClassParamUnit.
      * 
      * This is required to capture the input class I.
      * 
      * @param inputClass the input class.
      */
-    protected JsonClassParamTest(Class<I> inputClass) {
-        super(DEFAULT_MAPPER);
+    protected JsonClassParamUnit(Class<I> inputClass) {
+        super(JsonParamUnitConfig.builder().build());
         this.inputClass = inputClass;
     }
 
     /**
-     * Creates a new instance of the JsonClassParamTest.
+     * Creates a new instance of the JsonClassParamUnit.
      * 
      * @param inputClass the input class
-     * @param mapper the mapper
+     * @param config the config
      */
-    protected JsonClassParamTest(Class<I> inputClass, ObjectMapper mapper) {
-        super(mapper);
+    protected JsonClassParamUnit(Class<I> inputClass, JsonParamUnitConfig config) {
+        super(config);
         this.inputClass = inputClass;
     }
 
     @Override
-    public JsonNode process(JsonNode input, String context) {
+    public final JsonNode process(JsonNode input, String context) {
 
         // Convert the input JsonNode to the class I
-        I inputObject = this.getMapper().convertValue(input, inputClass);
+        I inputObject = this.getConfig().getMapper().convertValue(input, inputClass);
 
         // Process the input, get back the output O
         O outputObject = process(inputObject, context);
 
         // Convert the output into a JsonNode
-        return this.getMapper().convertValue(outputObject, JsonNode.class);
+        return this.getConfig().getMapper().convertValue(outputObject, JsonNode.class);
     }
 
     /****

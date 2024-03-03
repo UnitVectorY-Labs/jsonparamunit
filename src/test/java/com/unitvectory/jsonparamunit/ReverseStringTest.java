@@ -20,7 +20,7 @@ import com.unitvectory.jsonparamunit.example.OutputString;
  * 
  * @author Jared Hatfield (UnitVectorY Labs)
  */
-public class ReverseStringTest extends JsonClassParamTest<InputString, OutputString> {
+public class ReverseStringTest extends JsonClassParamUnit<InputString, OutputString> {
 
     @ParameterizedTest
     @ListFileSource(resources = "/strings/", fileExtension = ".json", recurse = false)
@@ -30,8 +30,10 @@ public class ReverseStringTest extends JsonClassParamTest<InputString, OutputStr
     }
 
     protected ReverseStringTest() {
-        super(InputString.class, new ObjectMapper()
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false));
+        super(InputString.class,
+                JsonParamUnitConfig.builder().mapper(new ObjectMapper()
+                        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false))
+                        .build());
     }
 
     @Override

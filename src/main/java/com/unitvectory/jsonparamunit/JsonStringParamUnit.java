@@ -11,30 +11,28 @@ package com.unitvectory.jsonparamunit;
 import static org.junit.jupiter.api.Assertions.fail;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * JSON based parameterized test case that provides the input and output as String of JSON.
  * 
  * @author Jared Hatfield (UnitVectorY Labs)
  */
-public abstract class JsonStringParamTest extends JsonNodeParamTest {
+public abstract class JsonStringParamUnit extends JsonNodeParamUnit {
 
     /**
-     * Creates a new instance of the JsonStringParamTest.
-     * 
+     * Creates a new instance of the JsonStringParamUnit.
      */
-    protected JsonStringParamTest() {
-        super(DEFAULT_MAPPER);
+    protected JsonStringParamUnit() {
+        super(JsonParamUnitConfig.builder().build());
     }
 
     /**
-     * Creates a new instance of the JsonStringParamTest.
+     * Creates a new instance of the JsonStringParamUnit.
      * 
-     * @param mapper the mapper
+     * @param config the config
      */
-    protected JsonStringParamTest(ObjectMapper mapper) {
-        super(mapper);
+    protected JsonStringParamUnit(JsonParamUnitConfig config) {
+        super(config);
     }
 
     @Override
@@ -42,7 +40,7 @@ public abstract class JsonStringParamTest extends JsonNodeParamTest {
 
         String inputString = null;
         try {
-            inputString = this.getMapper().writeValueAsString(input);
+            inputString = this.getConfig().getMapper().writeValueAsString(input);
         } catch (JsonProcessingException e) {
             fail("failed to encode input as JsonNode", e);
         }
@@ -50,7 +48,7 @@ public abstract class JsonStringParamTest extends JsonNodeParamTest {
         String outputString = process(inputString, context);
 
         try {
-            return this.getMapper().readTree(outputString);
+            return this.getConfig().getMapper().readTree(outputString);
         } catch (JsonProcessingException e) {
             fail("failed to encode ouput as JsonNode", e);
             return null;

@@ -15,7 +15,7 @@ import org.json.JSONException;
 import org.skyscreamer.jsonassert.JSONAssert;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AccessLevel;
 import lombok.Getter;
 
 /**
@@ -23,27 +23,25 @@ import lombok.Getter;
  * 
  * @author Jared Hatfield (UnitVectorY Labs)
  */
-public abstract class JsonNodeParamTest {
+public abstract class JsonNodeParamUnit {
 
-    protected static final ObjectMapper DEFAULT_MAPPER = new ObjectMapper();
-
-    @Getter
-    protected final ObjectMapper mapper;
+    @Getter(value = AccessLevel.PROTECTED)
+    private final JsonParamUnitConfig config;
 
     /**
-     * Constructs a new instance of the JsonNodeParamTest class using the default mapper.
+     * Constructs a new instance of the JsonNodeParamUnit class using the default mapper.
      */
-    public JsonNodeParamTest() {
-        this(DEFAULT_MAPPER);
+    public JsonNodeParamUnit() {
+        this(JsonParamUnitConfig.builder().build());
     }
 
     /**
-     * Constructs a new instance of the JsonNodeParamTest class.
+     * Constructs a new instance of the JsonNodeParamUnit class.
      * 
-     * @param mapper the mapper
+     * @param config the config
      */
-    public JsonNodeParamTest(ObjectMapper mapper) {
-        this.mapper = mapper;
+    public JsonNodeParamUnit(JsonParamUnitConfig config) {
+        this.config = config;
     }
 
     /**
@@ -71,7 +69,7 @@ public abstract class JsonNodeParamTest {
      * 
      * @param filePath the file path
      */
-    public void run(String filePath) {
+    public final void run(String filePath) {
 
         JsonNode rootNode = null;
         try {
@@ -79,7 +77,7 @@ public abstract class JsonNodeParamTest {
             String file = Files.readString(Path.of(filePath));
 
             // Parse the JSON
-            rootNode = mapper.readTree(file);
+            rootNode = this.config.getMapper().readTree(file);
         } catch (Exception e) {
             fail("Failed to parse JSON", e);
         }
@@ -104,7 +102,7 @@ public abstract class JsonNodeParamTest {
         // The output must also be encoded as a string to utilize JSONAssert
         String expectedOutput;
         try {
-            expectedOutput = mapper.writeValueAsString(expectedOutputNode);
+            expectedOutput = this.config.getMapper().writeValueAsString(expectedOutputNode);
         } catch (JsonProcessingException e) {
             fail("failed to encode expected output", e);
             return;
@@ -114,7 +112,7 @@ public abstract class JsonNodeParamTest {
         JsonNode actualOutputNode = process(inputNode, context);
         String actualOutput;
         try {
-            actualOutput = mapper.writeValueAsString(actualOutputNode);
+            actualOutput = this.config.getMapper().writeValueAsString(actualOutputNode);
         } catch (JsonProcessingException e) {
             fail("failed to encode the actual output", e);
             return;
@@ -123,20 +121,10 @@ public abstract class JsonNodeParamTest {
         // Assert the actual output matches the expected output
         // This is the actual purpose of the test case.
         try {
-            JSONAssert.assertEquals(expectedOutput, actualOutput, this.isStrict());
+            JSONAssert.assertEquals(expectedOutput, actualOutput, this.config.isStrictOutput());
         } catch (JSONException e) {
             fail("failed to assert the actual output matches the expected output", e);
         }
-    }
-
-    /**
-     * Determines if the JSONAssert is a strict comparison
-     * 
-     * @return true if strict; otherwise false
-     */
-    public boolean isStrict() {
-        // Default to Strict JSON comparison
-        return true;
     }
 
     /**

@@ -14,11 +14,11 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.unitvectory.fileparamunit.ListFileSource;
 
 /**
- * Test implementation of the JsonNodeParamTest class.
+ * Test implementation of the JsonNodeParamUnit class.
  * 
  * @author Jared Hatfield (UnitVectorY Labs)
  */
-public class JsonNodeTest extends JsonNodeParamTest {
+public class JsonNodeTest extends JsonNodeParamUnit {
 
     @ParameterizedTest
     @ListFileSource(resources = "/files", fileExtension = ".json", recurse = true)
@@ -29,7 +29,7 @@ public class JsonNodeTest extends JsonNodeParamTest {
 
     @Override
     public JsonNode process(JsonNode input, String context) {
-        ObjectNode node = this.getMapper().createObjectNode();
+        ObjectNode node = this.getConfig().getMapper().createObjectNode();
 
         if (input.get("foo").intValue() == 1) {
             node.put("success", true);

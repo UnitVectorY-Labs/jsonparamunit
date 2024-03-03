@@ -38,19 +38,19 @@ The goal of this library is to utilize JSON as a means of defining test cases. I
 
 There are 3 classes that can be used to create the test cases through extension that operate on the JSON Object at different levels of parsing:
 
-`JsonStringParamTest`: Input is passed a String containing the encoded JSON and output expects a String with the output JSON encoded.
+`JsonStringParamUnit`: Input is passed a String containing the encoded JSON and output expects a String with the output JSON encoded.
 
 ```java
 String process(String input, String context)
 ```
 
-`JsonNodeParamTest`: Input is passed as a Jackson JsonNode and output is expected as a JsonNode allowing for flexible handling of the input and output.
+`JsonNodeParamUnit`: Input is passed as a Jackson JsonNode and output is expected as a JsonNode allowing for flexible handling of the input and output.
 
 ```java
 JsonNode process(JsonNode input, String context)
 ```
 
-`JsonClassParamTest`: Input and output are both handled as POJOs utilziing Jackson to handle the serliziation and deserialization from the input and output. A complete example follows giving the following example class being used as both the input and output.
+`JsonClassParamUnit`: Input and output are both handled as POJOs utilziing Jackson to handle the serliziation and deserialization from the input and output. A complete example follows giving the following example class being used as both the input and output.
 
 ```java
 package example;
@@ -83,9 +83,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.unitvectory.fileparamunit.ListFileSource;
-import com.unitvectory.jsonparamunit.JsonClassParamTest;
+import com.unitvectory.jsonparamunit.JsonClassParamUnit;
 
-public class ReverseStringTest extends JsonClassParamTest<TestObject, TestObject> {
+public class ReverseStringTest extends JsonClassParamUnit<TestObject, TestObject> {
 
     @ParameterizedTest
     @ListFileSource(resources = "/strings/", fileExtension = ".json", recurse = false)
@@ -95,8 +95,10 @@ public class ReverseStringTest extends JsonClassParamTest<TestObject, TestObject
     }
 
     protected ReverseStringTest() {
-        super(TestObject.class, new ObjectMapper()
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false));
+        super(InputString.class,
+                JsonParamUnitConfig.builder().mapper(new ObjectMapper()
+                        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false))
+                        .build());
     }
 
     @Override
@@ -109,6 +111,7 @@ public class ReverseStringTest extends JsonClassParamTest<TestObject, TestObject
 }
 ```
 
-A few knobs exist for customizing the behavior. The first is the constructor for each class can have the Jackson ObjectMapper be passed to it allowing for customization which can be helpful depending on the payload.
+The `JsonParamUnitTest` can be provided as a constructor parameter to be able to customize the behavior of the test case.
 
-The default behavior for comparing the output using JSON Assert is a strict comparison. Meaning that any extra attributes in the output will result in the test failure. It is strongly recommended to use this behvaior but if not desired to change this behavior the `isStrict` method can be overridden to return false.
+- The Jackson ObjectMapper can be provided using the `mapper` parameter.
+- The JSON Assert behavior defaults to strict which is highly recommended but can be changed using the `strictOutput` parameter.

@@ -12,11 +12,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import com.unitvectory.fileparamunit.ListFileSource;
 
 /**
- * Test implementation of the JsonStringParamTest class.
+ * Test implementation of the JsonStringParamUnit class.
  * 
  * @author Jared Hatfield (UnitVectorY Labs)
  */
-public class JsonStringTest extends JsonStringParamTest {
+public class JsonStringTest extends JsonStringParamUnit {
 
     @ParameterizedTest
     @ListFileSource(resources = "/files", fileExtension = ".json", recurse = true)
