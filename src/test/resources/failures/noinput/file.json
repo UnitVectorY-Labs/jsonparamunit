@@ -1,0 +1,6 @@
+{
+  "context": "context",
+  "output": {
+    "foo": "bar"
+  }
+}

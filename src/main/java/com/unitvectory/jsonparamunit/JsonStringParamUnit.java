@@ -8,7 +8,6 @@
  */
 package com.unitvectory.jsonparamunit;
 
-import static org.junit.jupiter.api.Assertions.fail;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -42,7 +41,7 @@ public abstract class JsonStringParamUnit extends JsonNodeParamUnit {
         try {
             inputString = this.getConfig().getMapper().writeValueAsString(input);
         } catch (JsonProcessingException e) {
-            fail("failed to encode input as JsonNode", e);
+            throw new JsonParamError("Failed to encode input as String.", e);
         }
 
         String outputString = process(inputString, context);
@@ -50,8 +49,7 @@ public abstract class JsonStringParamUnit extends JsonNodeParamUnit {
         try {
             return this.getConfig().getMapper().readTree(outputString);
         } catch (JsonProcessingException e) {
-            fail("failed to encode ouput as JsonNode", e);
-            return null;
+            throw new JsonParamError("Failed to decode output as JsonNode.", e);
         }
     }
 

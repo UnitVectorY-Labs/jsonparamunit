@@ -8,7 +8,6 @@
  */
 package com.unitvectory.jsonparamunit;
 
-import static org.junit.jupiter.api.Assertions.fail;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.json.JSONException;
@@ -71,20 +70,44 @@ public abstract class JsonNodeParamUnit {
      */
     public final void run(String filePath) {
 
+        if (filePath == null) {
+            throw new JsonParamError("The provided filePath is null.");
+        }
+
+        if (filePath.isEmpty()) {
+            throw new JsonParamError("The provided filePath is empty.");
+        }
+
+        Path path = Path.of(filePath);
+
+        // Check if the file exists
+
+        if (!Files.exists(path)) {
+            throw new JsonParamError("The provided filePath does not exist.");
+        }
+
+        // Check if the file is a directory
+
+        if (!Files.isRegularFile(path)) {
+            throw new JsonParamError("The provided filePath is not a regular file.");
+        }
+
+        // Parse the test JSON
+
         JsonNode rootNode = null;
         try {
             // Load the file path to string
-            String file = Files.readString(Path.of(filePath));
+            String file = Files.readString(path);
 
             // Parse the JSON
             rootNode = this.config.getMapper().readTree(file);
         } catch (Exception e) {
-            fail("Failed to parse JSON", e);
+            throw new JsonParamError("Failed to parse the JSON from the test file.", e);
         }
 
-        // THe input object
+        // The input object
         if (!rootNode.has("input")) {
-            fail("Input is missing");
+            throw new JsonParamError("The 'input' JSON Object is missing from the test file.");
         }
 
         JsonNode inputNode = rootNode.get("input");
@@ -94,7 +117,7 @@ public abstract class JsonNodeParamUnit {
 
         // The output object
         if (!rootNode.has("output")) {
-            fail("Output is missing");
+            throw new JsonParamError("The 'output' JSON Object is missing from the test file.");
         }
 
         JsonNode expectedOutputNode = rootNode.get("output");
@@ -104,8 +127,8 @@ public abstract class JsonNodeParamUnit {
         try {
             expectedOutput = this.config.getMapper().writeValueAsString(expectedOutputNode);
         } catch (JsonProcessingException e) {
-            fail("failed to encode expected output", e);
-            return;
+            throw new JsonParamError("The 'output' JSON Object could not be encoded as a string.",
+                    e);
         }
 
         // Process the input to produce the actual output
@@ -114,8 +137,7 @@ public abstract class JsonNodeParamUnit {
         try {
             actualOutput = this.config.getMapper().writeValueAsString(actualOutputNode);
         } catch (JsonProcessingException e) {
-            fail("failed to encode the actual output", e);
-            return;
+            throw new JsonParamError("The actual output could not be encoded as a string.", e);
         }
 
         // Assert the actual output matches the expected output
@@ -123,7 +145,8 @@ public abstract class JsonNodeParamUnit {
         try {
             JSONAssert.assertEquals(expectedOutput, actualOutput, this.config.isStrictOutput());
         } catch (JSONException e) {
-            fail("failed to assert the actual output matches the expected output", e);
+            throw new JsonParamError(
+                    "Failed to assert the actual output matches the expected output.", e);
         }
     }
 
