@@ -1,3 +1,5 @@
+[![License](https://img.shields.io/badge/License-EPL%202.0-blue.svg)](https://www.eclipse.org/legal/epl-v20.html) [![codecov](https://codecov.io/gh/UnitVectorY-Labs/jsonparamunit/graph/badge.svg?token=EAJEIFCXYU)](https://codecov.io/gh/UnitVectorY-Labs/jsonparamunit)
+
 # jsonparamunit
 
 Library for creating parameterized JUnit 5 tests based on JSON files.
