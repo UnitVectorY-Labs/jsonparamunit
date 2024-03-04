@@ -68,7 +68,7 @@ public abstract class JsonNodeParamUnit {
      * 
      * @param filePath the file path
      */
-    public final void run(String filePath) {
+    protected final void run(String filePath) {
 
         if (filePath == null) {
             throw new JsonParamError("The provided filePath is null.");
@@ -157,5 +157,5 @@ public abstract class JsonNodeParamUnit {
      * @param context the context
      * @return the output
      */
-    public abstract JsonNode process(JsonNode input, String context);
+    protected abstract JsonNode process(JsonNode input, String context);
 }

@@ -35,7 +35,7 @@ public abstract class JsonStringParamUnit extends JsonNodeParamUnit {
     }
 
     @Override
-    public final JsonNode process(JsonNode input, String context) {
+    protected final JsonNode process(JsonNode input, String context) {
 
         String inputString = null;
         try {
@@ -62,6 +62,6 @@ public abstract class JsonStringParamUnit extends JsonNodeParamUnit {
      * @param context the context
      * @return the output
      */
-    public abstract String process(String input, String context);
+    protected abstract String process(String input, String context);
 
 }

@@ -44,7 +44,7 @@ public abstract class JsonClassParamUnit<I, O> extends JsonNodeParamUnit {
     }
 
     @Override
-    public final JsonNode process(JsonNode input, String context) {
+    protected final JsonNode process(JsonNode input, String context) {
 
         // Convert the input JsonNode to the class I
         I inputObject = this.getConfig().getMapper().convertValue(input, inputClass);
@@ -66,6 +66,6 @@ public abstract class JsonClassParamUnit<I, O> extends JsonNodeParamUnit {
      * @param context the context.
      * @return the output.
      */
-    public abstract O process(I input, String context);
+    protected abstract O process(I input, String context);
 
 }
