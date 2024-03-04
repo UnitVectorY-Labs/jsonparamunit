@@ -1,0 +1,7 @@
+{
+  "input": {},
+  "context": "123xyz",
+  "output": {
+    "value": "123xyz"
+  }
+}
