@@ -1,4 +1,4 @@
-[![License](https://img.shields.io/badge/License-EPL%202.0-blue.svg)](https://www.eclipse.org/legal/epl-v20.html) [![codecov](https://codecov.io/gh/UnitVectorY-Labs/jsonparamunit/graph/badge.svg?token=EAJEIFCXYU)](https://codecov.io/gh/UnitVectorY-Labs/jsonparamunit)
+[![License](https://img.shields.io/badge/License-EPL%202.0-blue.svg)](https://www.eclipse.org/legal/epl-v20.html) [![Maven Central](https://img.shields.io/maven-central/v/com.unitvectory/jsonparamunit)](https://mvnrepository.com/artifact/com.unitvectory/jsonparamunit) [![codecov](https://codecov.io/gh/UnitVectorY-Labs/jsonparamunit/graph/badge.svg?token=EAJEIFCXYU)](https://codecov.io/gh/UnitVectorY-Labs/jsonparamunit)
 
 # jsonparamunit
 
@@ -14,9 +14,16 @@ Designed for ease of integration into existing Java 17+ and JUnit 5 projects, th
 
 ## Getting Started
 
-This library requires Java 17 and JUnit 5.
+This library requires Java 17 and JUnit 5 and is available in the Maven Central Repository:
 
-This library is still under development.
+```xml
+<dependency>
+    <groupId>com.unitvectory</groupId>
+    <artifactId>jsonparamunit</artifactId>
+    <version>0.0.1</version>
+    <scope>test</scope>
+</dependency>
+```
 
 ## Usage
 
