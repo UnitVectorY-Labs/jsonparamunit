@@ -1,4 +1,4 @@
-[![License](https://img.shields.io/badge/License-EPL%202.0-blue.svg)](https://www.eclipse.org/legal/epl-v20.html) [![Maven Central](https://img.shields.io/maven-central/v/com.unitvectory/jsonparamunit)](https://mvnrepository.com/artifact/com.unitvectory/jsonparamunit) [![javadoc](https://javadoc.io/badge2/com.unitvectory/jsonparamunit/javadoc.svg)](https://javadoc.io/doc/com.unitvectory/jsonparamunit) [![codecov](https://codecov.io/gh/UnitVectorY-Labs/jsonparamunit/graph/badge.svg?token=EAJEIFCXYU)](https://codecov.io/gh/UnitVectorY-Labs/jsonparamunit)
+[![License](https://img.shields.io/badge/License-EPL%202.0-blue.svg)](https://www.eclipse.org/legal/epl-v20.html) [![Maven Central](https://img.shields.io/maven-central/v/com.unitvectory/jsonparamunit)](https://central.sonatype.com/artifact/com.unitvectory/jsonparamunit) [![javadoc](https://javadoc.io/badge2/com.unitvectory/jsonparamunit/javadoc.svg)](https://javadoc.io/doc/com.unitvectory/jsonparamunit) [![codecov](https://codecov.io/gh/UnitVectorY-Labs/jsonparamunit/graph/badge.svg?token=EAJEIFCXYU)](https://codecov.io/gh/UnitVectorY-Labs/jsonparamunit)
 
 # jsonparamunit
 
