@@ -8,7 +8,6 @@
  */
 package com.unitvectory.jsonparamunit;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 
 /**
@@ -36,21 +35,10 @@ public abstract class JsonStringParamUnit extends JsonNodeParamUnit {
 
     @Override
     protected final JsonNode process(JsonNode input, String context) {
-
-        String inputString = null;
-        try {
-            inputString = this.getConfig().getMapper().writeValueAsString(input);
-        } catch (JsonProcessingException e) {
-            throw new JsonParamError("Failed to encode input as String.", e);
-        }
-
+        String inputString =
+                JsonConverter.jsonNodeToString(this.getConfig().getMapper(), input, "input");
         String outputString = process(inputString, context);
-
-        try {
-            return this.getConfig().getMapper().readTree(outputString);
-        } catch (JsonProcessingException e) {
-            throw new JsonParamError("Failed to decode output as JsonNode.", e);
-        }
+        return JsonConverter.stringToJsonNode(this.getConfig().getMapper(), outputString, "output");
     }
 
     /**

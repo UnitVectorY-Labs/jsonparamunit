@@ -12,7 +12,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import org.json.JSONException;
 import org.skyscreamer.jsonassert.JSONAssert;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -123,27 +122,28 @@ public abstract class JsonNodeParamUnit {
         JsonNode expectedOutputNode = rootNode.get("output");
 
         // The output must also be encoded as a string to utilize JSONAssert
-        String expectedOutput;
-        try {
-            expectedOutput = this.config.getMapper().writeValueAsString(expectedOutputNode);
-        } catch (JsonProcessingException e) {
-            throw new JsonParamError("The 'output' JSON Object could not be encoded as a string.",
-                    e);
-        }
+        String expectedOutput = JsonConverter.jsonNodeToString(this.config.getMapper(),
+                expectedOutputNode, "output");
 
         // Process the input to produce the actual output
         JsonNode actualOutputNode = process(inputNode, context);
-        String actualOutput;
-        try {
-            actualOutput = this.config.getMapper().writeValueAsString(actualOutputNode);
-        } catch (JsonProcessingException e) {
-            throw new JsonParamError("The actual output could not be encoded as a string.", e);
-        }
+        String actualOutput = JsonConverter.jsonNodeToString(this.config.getMapper(),
+                actualOutputNode, "actualOutput");
 
         // Assert the actual output matches the expected output
         // This is the actual purpose of the test case.
+        assertJsonEquals(expectedOutput, actualOutput);
+    }
+
+    /**
+     * Uses JSONAssert to verify the JSON strings are equal.
+     * 
+     * @param expected the expected JSON
+     * @param actual the actual JSON
+     */
+    protected void assertJsonEquals(String expected, String actual) {
         try {
-            JSONAssert.assertEquals(expectedOutput, actualOutput, this.config.isStrictOutput());
+            JSONAssert.assertEquals(expected, actual, this.config.isStrictOutput());
         } catch (JSONException e) {
             throw new JsonParamError(
                     "Failed to assert the actual output matches the expected output.", e);

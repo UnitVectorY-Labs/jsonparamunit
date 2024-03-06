@@ -42,6 +42,16 @@ public class FailuresTest extends JsonNodeParamUnit {
         assertEquals("The provided filePath is empty.", exception.getMessage());
     }
 
+    @Test
+    public void assertJsonEqualsInvalidTest() {
+        JsonParamError exception = assertThrows(JsonParamError.class, () -> {
+            this.assertJsonEquals("{{{", "");
+        });
+
+        assertEquals("Failed to assert the actual output matches the expected output.",
+                exception.getMessage());
+    }
+
     @ParameterizedTest
     @ListFileSource(resources = "/failures/badjson", fileExtension = ".json")
     public void fileNotExistTest(String file) {

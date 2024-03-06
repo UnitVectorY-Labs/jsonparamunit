@@ -34,13 +34,4 @@ public class JsonParamError extends AssertionError {
     public JsonParamError(String message, Throwable cause) {
         super(message, cause);
     }
-
-    /**
-     * Creates a new instance of the JsonParamError class.
-     * 
-     * @param cause the cause
-     */
-    public JsonParamError(Throwable cause) {
-        super(cause);
-    }
 }
