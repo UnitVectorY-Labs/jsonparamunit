@@ -18,10 +18,6 @@ import com.unitvectory.fileparamunit.ListFileSource;
  */
 public class JsonStringTest extends JsonStringParamUnit {
 
-    public JsonStringTest() {
-        super(JsonParamUnitConfig.builder().build());
-    }
-
     @ParameterizedTest
     @ListFileSource(resources = "/files", fileExtension = ".json", recurse = true)
     public void testIt(String file) {

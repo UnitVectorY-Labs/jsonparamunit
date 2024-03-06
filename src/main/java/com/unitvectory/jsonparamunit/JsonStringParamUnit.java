@@ -21,7 +21,7 @@ public abstract class JsonStringParamUnit extends JsonNodeParamUnit {
      * Creates a new instance of the JsonStringParamUnit.
      */
     protected JsonStringParamUnit() {
-        super(JsonParamUnitConfig.builder().build());
+        this(JsonParamUnitConfig.builder().build());
     }
 
     /**
