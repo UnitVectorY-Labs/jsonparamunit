@@ -6,7 +6,7 @@ Library for creating parameterized JUnit 5 tests based on JSON files.
 
 ## Purpose
 
-The core objective of this library is to streamline the way developers approach unit testing in Java through the use of data driven test cases. By leveraging JSON for defining test parameters, including inputs and expected outputs, jsonparamunit aims to simplify the process of creating and maintaining test cases.
+The core objective of this library is to streamline the way developers approach unit testing in Java through the use of data driven test cases. By leveraging JSON for defining test parameters, including inputs and expected outputs, `jsonparamunit` aims to simplify the process of creating and maintaining test cases.
 
 This approach allows developers to focus on the logic and behavior of the code under test, rather than the mechanics of test case setup. When combined with [fileparamunit](https://github.com/UnitVectorY-Labs/fileparamunit) the test cases are defined as JSON with a single Java class calling the method to test.
 
@@ -82,6 +82,15 @@ public class TestObject {
 The example shown here is using reversing a string as the example, but in practice the input and output are expected to be more complex objects exercising the logic of the code under test.
 
 This example also uses [fileparamunit](https://github.com/UnitVectorY-Labs/fileparamunit) to iterate through all of the JSON files contained in the `/strings` directory under the test resources allowing additional test cases to be created without modifying the Java code.
+
+```xml
+<dependency>
+    <groupId>com.unitvectory</groupId>
+    <artifactId>fileparamunit</artifactId>
+    <version>0.0.3</version>
+    <scope>test</scope>
+</dependency>
+```
 
 The actual execution of a test is performed by calling the `run` method passing in the path to the JSON file with the test case.
 
