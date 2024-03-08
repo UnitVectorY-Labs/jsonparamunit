@@ -20,7 +20,7 @@ This library requires Java 17 and JUnit 5 and is available in the Maven Central 
 <dependency>
     <groupId>com.unitvectory</groupId>
     <artifactId>jsonparamunit</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <scope>test</scope>
 </dependency>
 ```
