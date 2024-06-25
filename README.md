@@ -87,7 +87,7 @@ This example also uses [fileparamunit](https://github.com/UnitVectorY-Labs/filep
 <dependency>
     <groupId>com.unitvectory</groupId>
     <artifactId>fileparamunit</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
     <scope>test</scope>
 </dependency>
 ```
