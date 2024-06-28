@@ -11,8 +11,9 @@ package com.unitvectory.jsonparamunit;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.json.JSONException;
-import org.skyscreamer.jsonassert.JSONAssert;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.unitvectory.jsonassertify.JSONAssert;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 
