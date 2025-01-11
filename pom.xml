@@ -48,7 +48,7 @@
         <dependency>
             <groupId>com.unitvectory</groupId>
             <artifactId>jsonassertify</artifactId>
-            <version>0.0.2</version>
+            <version>0.0.3</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
