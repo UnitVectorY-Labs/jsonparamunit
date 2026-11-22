@@ -13,7 +13,7 @@ config:
     enabled: false
   osv: sarif
   gitignore:
-    - .vscode
+    - .vscode/
   maven:
     group_id: com.unitvectory
     artifact_id: jsonparamunit
