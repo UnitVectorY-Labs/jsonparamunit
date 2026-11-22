@@ -9,6 +9,12 @@ config:
   codecov:
     enabled: true
     token: EAJEIFCXYU
+  docs:
+    enabled: false
+  osv: sarif
+  gitignore:
+    - .vscode
   maven:
     group_id: com.unitvectory
     artifact_id: jsonparamunit
+    javadoc: true
