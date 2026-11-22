@@ -1,6 +1,14 @@
 name: jsonparamunit
 default_branch: main
 config:
+  description: "Library for creating parameterized JUnit 5 tests based on JSON files."
+  license: EPL-2.0
+  language: java17
+  release_github: true
+  status: active
+  codecov:
+    enabled: true
+    token: EAJEIFCXYU
   maven:
     group_id: com.unitvectory
     artifact_id: jsonparamunit
