@@ -1,0 +1,6 @@
+name: jsonparamunit
+default_branch: main
+config:
+  maven:
+    group_id: com.unitvectory
+    artifact_id: jsonparamunit
