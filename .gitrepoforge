@@ -6,9 +6,6 @@ config:
   language: java17
   release_github: true
   status: active
-  codecov:
-    enabled: true
-    token: EAJEIFCXYU
   docs:
     enabled: false
   osv: sarif
